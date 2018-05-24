@@ -7,7 +7,7 @@ const NavBarComponent = props => {
       <a href="#about" className="navLink" id="navAbout" onClick={handleNavClicks}>About Me</a>
       <a href="#projects" className="navLink" id="navProjects" onClick={handleNavClicks}>Projects</a>
       <a href="#contact" className="navLink" id="navContact" onClick={handleNavClicks}>Contact</a>
-      <a href="/assets/documents/KellemNoah_Resume.pdf" target="_blank" className="navLink" id="navResume">Resume</a>
+      <a href="/assets/documents/KellemNoah_Resume.pdf" target="_blank" className="navLink" id="navResume">Résumé</a>
     </span>
   );
 };
@@ -85,6 +85,74 @@ const AboutSectionComponent = props => {
       <AboutRightComponent />
     </div>
   );
+};
+
+//React component for displaying the projects image section
+const ProjectsImgComponent = props => {
+  return (
+    <span id="projectsImg">
+      <img src={props.imgSrc} alt={props.imgAlt} />
+    </span>
+  );
+};
+
+//React component for displaying the projects caption section
+const ProjectsCaptionComponent = props => {
+  return (
+    <span id="projectsCaption">
+      <span>
+        <h3>{props.projectTitle}</h3>
+        <p>{props.caption}</p>
+        <p>{props.poweredBy}</p>
+        <p><a href={props.liveSite} target="_blank">View This Project</a></p>
+        <p><a href={props.github} target="_blank">Check Out The Code on GitHub</a></p>
+      </span>
+    </span>
+  );
+};
+
+//React component for rendering the image and the caption together
+const ProjectImgAndCaption = props => {
+  return (
+    <div className="animated">
+      <ProjectsImgComponent imgSrc={props.imgSrc} imgAlt={props.imgAlt} />
+      <ProjectsCaptionComponent projectTitle={props.projectTitle} caption={props.caption}
+       poweredBy={props.poweredBy} liveSite={props.liveSite} github={props.github} />
+    </div>
+  );
+};
+
+//React component for displaying the project picker
+const ProjectsPickerComponent = props => {
+  let pickerParts = [];
+  let index = 0;
+
+  projects.forEach(project => {
+    if (index === 0) {
+      pickerParts.push(<span className='circle projActive' value={index} onClick={handleProjectClick}></span>);
+    } else {
+      pickerParts.push(<span className='circle' value={index} onClick={handleProjectClick}></span>);
+    }
+
+    index++;
+  });
+
+  return (
+    <div id="projectsPicker">
+      {pickerParts}
+    </div>
+  );
+};
+
+//React component for displaying the entire project section
+const ProjectSectionComponent = props => {
+  return (
+    <div id="projectsSection">
+      <div id="projectsContent">
+      </div>
+      <ProjectsPickerComponent />
+    </div>
+  )
 };
 
 //React component for displaying a toast message
@@ -174,6 +242,27 @@ const renderAboutSectionComponent = () => {
   );
 };
 
+//Method for rendering just the img and caption
+const renderProjectImgAndCaption = projIndex => {
+  const project = projects[projIndex];
+
+  ReactDOM.render(
+    <ProjectImgAndCaption imgSrc={project.src} imgAlt={project.alt} projectTitle={project.projTitle} caption={project.projDescription}
+     poweredBy={project.projTechnologies} liveSite={project.projSiteLink} github={project.projGithub} />,
+    document.querySelector('#projectsContent')
+  );
+};
+
+//Method for rendering the projects section
+const renderProjectsSection = () => {
+  ReactDOM.render(
+    <ProjectSectionComponent />,
+    document.querySelector('#projects')
+  );
+
+  renderProjectImgAndCaption(0);
+};
+
 //Method for rendering the contact section
 const renderContactSectionComponent = () => {
   ReactDOM.render(
@@ -190,134 +279,14 @@ const renderToastComponent = (message, classes) => {
   );
 };
 
-/// SECTION: Events and other app logic
-const borderMap = new Map();
-borderMap.set('#about', 'var(--custom-red)');
-borderMap.set('#projects', 'var(--custom-purple)');
-borderMap.set('#contact', 'var(--custom-green)');
-
+/// SECTION: App logic
 const setup = () => {
   renderNavBar();
   renderSplashSectionComponent();
   renderAboutSectionComponent();
+  renderProjectsSection();
   renderContactSectionComponent();
   elementIsVisible();
-};
-
-// TODO:: Decide if I want to keep this or not
-const handleNavClicks = e => {
-}
-
-const handleContactSubmit = e => {
-  e.preventDefault();
-
-  const form = document.querySelector('#contactForm');
-  const action = form.getAttribute('action');
-  const type = form.getAttribute('method');
-  const data = serialize(form);
-  const name = document.querySelector('#name').value;
-  const email = document.querySelector('#email').value;
-  const body = document.querySelector('#body').value;
-
-  if (!name || !email || !body) {
-    renderToastComponent('*All fields are required.', 'toast error animated shake');
-    return;
-  }
-
-  fetch(action, {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    credentials: 'include',
-    method: type,
-    body: data
-  }).then(response => {
-    return response.json();
-  }).then(data => {
-    if (data.error) {
-      renderToastComponent(data.message, 'toast error animated shake');
-      return;
-    }
-    emailSuccess(data.message, name, email, body);
-  });
-};
-
-//Animates a successful toast message and resets the form
-const emailSuccess = (message) => {
-  document.querySelector('#name').value = '';
-  document.querySelector('#email').value = '';
-  document.querySelector('#body').value = '';
-
-  renderToastComponent(message, 'toast success animated bounceIn');
-
-  setTimeout(() => {
-    renderToastComponent(message, 'toast success animated bounceOut');
-    setTimeout(() => {
-      document.querySelector('.toast').style.display = 'none';
-    }, 750);
-  }, 3000);
-};
-
-//Checks for where the user is on the page and makes the appropriate link active
-const makeLinkActive = divYPos => {
-  if (window.pageYOffset >= divYPos[0] && window.pageYOffset < divYPos[1]) {
-    if (document.querySelector('a[class="navLink active"]')) {
-      document.querySelector('a[class="navLink active"]').style.borderBottom = '';
-      document.querySelector('a[class="navLink active"]').classList.remove('active');
-    }
-  }
-
-  if (window.pageYOffset >= divYPos[1] && window.pageYOffset < divYPos[2]) {
-    if (!document.querySelector('a[class="navLink active"]')) {
-      document.querySelector('#navAbout').classList.add('active');
-      document.querySelector('a[class="navLink active"]').style.borderBottom = '2px solid var(--custom-red)';
-    } else if (document.querySelector('a[class="navLink active"]').href !== '#about') {
-      document.querySelector('a[class="navLink active"]').style.borderBottom = '';
-      document.querySelector('a[class="navLink active"]').classList.remove('active');
-      document.querySelector('#navAbout').classList.add('active');
-      document.querySelector('a[class="navLink active"]').style.borderBottom = '2px solid var(--custom-red)';
-    }
-  }
-
-  if (window.pageYOffset >= divYPos[2] && window.pageYOffset < divYPos[3]) {
-    if (!document.querySelector('a[class="navLink active"]')) {
-      document.querySelector('#navProjects').classList.add('active');
-      document.querySelector('a[class="navLink active"]').style.borderBottom = '2px solid var(--custom-purple)';
-    } else if (document.querySelector('a[class="navLink active"]').href !== '#projects') {
-      document.querySelector('a[class="navLink active"]').style.borderBottom = '';
-      document.querySelector('a[class="navLink active"]').classList.remove('active');
-      document.querySelector('#navProjects').classList.add('active');
-      document.querySelector('a[class="navLink active"]').style.borderBottom = '2px solid var(--custom-purple)';
-    }
-  }
-
-  if (window.pageYOffset >= divYPos[3]) {
-    if (!document.querySelector('a[class="navLink active"]')) {
-      document.querySelector('#navContact').classList.add('active');
-      document.querySelector('a[class="navLink active"]').style.borderBottom = '2px solid var(--custom-green)';
-    } else if (document.querySelector('a[class="navLink active"]').href !== '#contact') {
-      document.querySelector('a[class="navLink active"]').style.borderBottom = '';
-      document.querySelector('a[class="navLink active"]').classList.remove('active');
-      document.querySelector('#navContact').classList.add('active');
-      document.querySelector('a[class="navLink active"]').style.borderBottom = '2px solid var(--custom-green)';
-    }
-  }
-};
-
-//Detects which element is in the viewport as a scroll event
-const elementIsVisible = () => {
-  const divYPos = [
-    document.querySelector('#splash').offsetTop,
-    document.querySelector('#about').offsetTop - 100,
-    document.querySelector('#projects').offsetTop - 100,
-    document.querySelector('#contact').offsetTop - 100
-  ];
-
-  const standardHeight = document.querySelector('#splash').clientHeight;
-
-  window.addEventListener('scroll', e => {
-    makeLinkActive(divYPos);
-  });
 };
 
 setup();

@@ -1,3 +1,183 @@
+'use strict';
+
+//Sets up the border colors for the nav bar links
+var borderMap = new Map();
+borderMap.set('#about', 'var(--custom-red)');
+borderMap.set('#projects', 'var(--custom-purple)');
+borderMap.set('#contact', 'var(--custom-green)');
+
+//Array for storing info about Projects
+var projects = [{
+  src: '/assets/images/r6tracker.png',
+  alt: 'Screenshot of the Rainbow Six Siege Cosmetics Tracker',
+  projTitle: 'R6S Cosmetics Tracker',
+  projDescription: 'A cosmetics tracker for the popular video game Rainbow Six Siege. Users can create their own accounts\n                      and log cosmetic items they receive in the game on a per-character basis. The "free" tier lets users only\n                      track weapon skins and a "paid" tier allows them to track all other cosmetics.',
+  projTechnologies: 'Powered by a Node.js and MongoDB back-end with a React.js front-end.',
+  projSiteLink: 'https://r6siegetracker.herokuapp.com',
+  projGithub: 'https://github.com/nkellem/Rainbow6SiegeCosmeticsTracker'
+}, {
+  src: '/assets/images/partyup.png',
+  alt: 'Screenshot of the PartyUp Web App',
+  projTitle: 'PartyUp',
+  projDescription: 'PartyUp is a dynamic song/video playlist for use by you and your friends! One person creates an optionally\n                      password-protected playlist that everyone else connects to. Once connected, users can add songs/videos to\n                      a queue that is auto-played from the Host\'s device. Every connected user can restart or skip songs/videos.',
+  projTechnologies: 'Powered by Node.js and Websockets utilizing the Socket.io npm library with a React.js front-end.',
+  projSiteLink: 'https://partyupapp.herokuapp.com/',
+  projGithub: 'https://github.com/nkellem/PartyUp'
+}, {
+  src: '/assets/images/spiphy.png',
+  alt: 'Screenshot of the SPIPHY Web App',
+  projTitle: 'SPIPHY',
+  projDescription: 'SPIPHY is a Web App that interacts with the GIPHY and Flickr APIs and utilizes the Web Speech API to allows users to easily search for\n                      gifs and pictures using their voice and share them with their friends. Users have the option to save gifs and pictures,\n                      share them via direct links, send them in Facebook messages, or tweet them out to their followers.',
+  projTechnologies: 'Built using HTML, CSS, JavaScript, and the Web Speech API.',
+  projSiteLink: 'https://people.rit.edu/nmk2485/portfolio/SPIPHY/index.html',
+  projGithub: 'https://github.com/nkellem/SPIPHY'
+}, {
+  src: '/assets/images/audioviz.png',
+  alt: "Screenshot of Noah's Web Audio Visualizer",
+  projTitle: 'Web Audio Visualizer',
+  projDescription: 'An audio visualizer utilizing the Web Audio API and Canvas to provide the feeling of a user interacting\n                      with a stereo entirely through Canvas UI elements. The user can interact with a number of different elements\n                      including Volume, Bass, Treble, display color, type of data visualized, and color scheme of the stereo.\n                      The user also has 3 different songs they can play, pause, and skip through.',
+  projTechnologies: 'Built using HTML, CSS, JavaScript, Canvas, and the Web Audio API.',
+  projSiteLink: 'https://people.rit.edu/nmk2485/portfolio/AudioViz/index.html',
+  projGithub: 'https://github.com/nkellem/WebAudioVisualizer'
+}, {
+  src: '/assets/images/aliensattack.png',
+  alt: 'Screenshot of Aliens Attack! web game',
+  projTitle: 'Aliens Attack!',
+  projDescription: 'Aliens Attack! is a Galaga inspired web game in which players must destroy enough alien ships\n                      in the time allotted and progress as far as they can.',
+  projTechnologies: 'Built using HTML, CSS, JavaScript, Canvas, and the Web Audio API.',
+  projSiteLink: 'https://people.rit.edu/nmk2485/portfolio/AliensAttack/',
+  projGithub: 'https://github.com/nkellem/AliensAttack'
+}];
+
+// TODO:: Decide if I want to keep this or not
+var handleNavClicks = function handleNavClicks(e) {};
+
+//Hits the API on the server side to send an email when someone completes the contact form
+var handleContactSubmit = function handleContactSubmit(e) {
+  e.preventDefault();
+
+  var form = document.querySelector('#contactForm');
+  var action = form.getAttribute('action');
+  var type = form.getAttribute('method');
+  var data = serialize(form);
+  var name = document.querySelector('#name').value;
+  var email = document.querySelector('#email').value;
+  var body = document.querySelector('#body').value;
+
+  if (!name || !email || !body) {
+    renderToastComponent('*All fields are required.', 'toast error animated shake');
+    return;
+  }
+
+  fetch(action, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    credentials: 'include',
+    method: type,
+    body: data
+  }).then(function (response) {
+    return response.json();
+  }).then(function (data) {
+    if (data.error) {
+      renderToastComponent(data.message, 'toast error animated shake');
+      return;
+    }
+    emailSuccess(data.message, name, email, body);
+  });
+};
+
+//Animates a successful toast message and resets the form
+var emailSuccess = function emailSuccess(message) {
+  document.querySelector('#name').value = '';
+  document.querySelector('#email').value = '';
+  document.querySelector('#body').value = '';
+
+  renderToastComponent(message, 'toast success animated bounceIn');
+
+  setTimeout(function () {
+    renderToastComponent(message, 'toast success animated bounceOut');
+    setTimeout(function () {
+      document.querySelector('#toastSection').innerHTML = '';
+    }, 750);
+  }, 3000);
+};
+
+//Checks for where the user is on the page and makes the appropriate link active
+var makeLinkActive = function makeLinkActive(divYPos) {
+  if (window.pageYOffset >= divYPos[0] && window.pageYOffset < divYPos[1]) {
+    if (document.querySelector('a[class="navLink active"]')) {
+      document.querySelector('a[class="navLink active"]').style.borderBottom = '';
+      document.querySelector('a[class="navLink active"]').classList.remove('active');
+    }
+  }
+
+  if (window.pageYOffset >= divYPos[1] && window.pageYOffset < divYPos[2]) {
+    if (!document.querySelector('a[class="navLink active"]')) {
+      document.querySelector('#navAbout').classList.add('active');
+      document.querySelector('a[class="navLink active"]').style.borderBottom = '2px solid var(--custom-red)';
+    } else if (document.querySelector('a[class="navLink active"]').href !== '#about') {
+      document.querySelector('a[class="navLink active"]').style.borderBottom = '';
+      document.querySelector('a[class="navLink active"]').classList.remove('active');
+      document.querySelector('#navAbout').classList.add('active');
+      document.querySelector('a[class="navLink active"]').style.borderBottom = '2px solid var(--custom-red)';
+    }
+  }
+
+  if (window.pageYOffset >= divYPos[2] && window.pageYOffset < divYPos[3]) {
+    if (!document.querySelector('a[class="navLink active"]')) {
+      document.querySelector('#navProjects').classList.add('active');
+      document.querySelector('a[class="navLink active"]').style.borderBottom = '2px solid var(--custom-purple)';
+    } else if (document.querySelector('a[class="navLink active"]').href !== '#projects') {
+      document.querySelector('a[class="navLink active"]').style.borderBottom = '';
+      document.querySelector('a[class="navLink active"]').classList.remove('active');
+      document.querySelector('#navProjects').classList.add('active');
+      document.querySelector('a[class="navLink active"]').style.borderBottom = '2px solid var(--custom-purple)';
+    }
+  }
+
+  if (window.pageYOffset >= divYPos[3]) {
+    if (!document.querySelector('a[class="navLink active"]')) {
+      document.querySelector('#navContact').classList.add('active');
+      document.querySelector('a[class="navLink active"]').style.borderBottom = '2px solid var(--custom-green)';
+    } else if (document.querySelector('a[class="navLink active"]').href !== '#contact') {
+      document.querySelector('a[class="navLink active"]').style.borderBottom = '';
+      document.querySelector('a[class="navLink active"]').classList.remove('active');
+      document.querySelector('#navContact').classList.add('active');
+      document.querySelector('a[class="navLink active"]').style.borderBottom = '2px solid var(--custom-green)';
+    }
+  }
+};
+
+//Detects which element is in the viewport as a scroll event
+var elementIsVisible = function elementIsVisible() {
+  var divYPos = [document.querySelector('#splash').offsetTop, document.querySelector('#about').offsetTop - 100, document.querySelector('#projects').offsetTop - 100, document.querySelector('#contact').offsetTop - 100];
+
+  var standardHeight = document.querySelector('#splash').clientHeight;
+
+  window.addEventListener('scroll', function (e) {
+    makeLinkActive(divYPos);
+  });
+};
+
+//Method for rendering the appropriate project in the projects section based on link click
+var handleProjectClick = function handleProjectClick(e) {
+  var projIndex = e.target.getAttribute('value');
+
+  document.querySelector('span[class="circle projActive"]').classList.remove('projActive');
+  e.target.classList.add('projActive');
+
+  if (document.querySelector('#projectsContent div').classList.contains('fadeIn')) {
+    document.querySelector('#projectsContent div').classList.replace('fadeIn', 'fadeOut');
+  } else {
+    document.querySelector('#projectsContent div').classList.add('fadeOut');
+  }
+
+  setTimeout(function () {
+    renderProjectImgAndCaption(projIndex);
+    document.querySelector('#projectsContent div').classList.replace('fadeOut', 'fadeIn');
+  }, 1000);
+};
 "use strict";
 
 /// SECTION: React components
@@ -25,7 +205,7 @@ var NavBarComponent = function NavBarComponent(props) {
     React.createElement(
       "a",
       { href: "/assets/documents/KellemNoah_Resume.pdf", target: "_blank", className: "navLink", id: "navResume" },
-      "Resume"
+      "R\xE9sum\xE9"
     )
   );
 };
@@ -149,6 +329,103 @@ var AboutSectionComponent = function AboutSectionComponent(props) {
   );
 };
 
+//React component for displaying the projects image section
+var ProjectsImgComponent = function ProjectsImgComponent(props) {
+  return React.createElement(
+    "span",
+    { id: "projectsImg" },
+    React.createElement("img", { src: props.imgSrc, alt: props.imgAlt })
+  );
+};
+
+//React component for displaying the projects caption section
+var ProjectsCaptionComponent = function ProjectsCaptionComponent(props) {
+  return React.createElement(
+    "span",
+    { id: "projectsCaption" },
+    React.createElement(
+      "span",
+      null,
+      React.createElement(
+        "h3",
+        null,
+        props.projectTitle
+      ),
+      React.createElement(
+        "p",
+        null,
+        props.caption
+      ),
+      React.createElement(
+        "p",
+        null,
+        props.poweredBy
+      ),
+      React.createElement(
+        "p",
+        null,
+        React.createElement(
+          "a",
+          { href: props.liveSite, target: "_blank" },
+          "View This Project"
+        )
+      ),
+      React.createElement(
+        "p",
+        null,
+        React.createElement(
+          "a",
+          { href: props.github, target: "_blank" },
+          "Check Out The Code on GitHub"
+        )
+      )
+    )
+  );
+};
+
+//React component for rendering the image and the caption together
+var ProjectImgAndCaption = function ProjectImgAndCaption(props) {
+  return React.createElement(
+    "div",
+    { className: "animated" },
+    React.createElement(ProjectsImgComponent, { imgSrc: props.imgSrc, imgAlt: props.imgAlt }),
+    React.createElement(ProjectsCaptionComponent, { projectTitle: props.projectTitle, caption: props.caption,
+      poweredBy: props.poweredBy, liveSite: props.liveSite, github: props.github })
+  );
+};
+
+//React component for displaying the project picker
+var ProjectsPickerComponent = function ProjectsPickerComponent(props) {
+  var pickerParts = [];
+  var index = 0;
+
+  projects.forEach(function (project) {
+    if (index === 0) {
+      pickerParts.push(React.createElement("span", { className: "circle projActive", value: index, onClick: handleProjectClick }));
+    } else {
+      pickerParts.push(React.createElement("span", { className: "circle", value: index, onClick: handleProjectClick }));
+    }
+
+    index++;
+  });
+
+  return React.createElement(
+    "div",
+    { id: "projectsPicker" },
+    pickerParts
+  );
+};
+
+//React component for displaying the entire project section
+var ProjectSectionComponent = function ProjectSectionComponent(props) {
+  return React.createElement(
+    "div",
+    { id: "projectsSection" },
+    React.createElement("div", { id: "projectsContent" }),
+    React.createElement(ProjectsPickerComponent, null)
+  );
+};
+
 //React component for displaying a toast message
 var ToastComponent = function ToastComponent(props) {
   return React.createElement(
@@ -267,6 +544,21 @@ var renderAboutSectionComponent = function renderAboutSectionComponent() {
   ReactDOM.render(React.createElement(AboutSectionComponent, null), document.querySelector('#about'));
 };
 
+//Method for rendering just the img and caption
+var renderProjectImgAndCaption = function renderProjectImgAndCaption(projIndex) {
+  var project = projects[projIndex];
+
+  ReactDOM.render(React.createElement(ProjectImgAndCaption, { imgSrc: project.src, imgAlt: project.alt, projectTitle: project.projTitle, caption: project.projDescription,
+    poweredBy: project.projTechnologies, liveSite: project.projSiteLink, github: project.projGithub }), document.querySelector('#projectsContent'));
+};
+
+//Method for rendering the projects section
+var renderProjectsSection = function renderProjectsSection() {
+  ReactDOM.render(React.createElement(ProjectSectionComponent, null), document.querySelector('#projects'));
+
+  renderProjectImgAndCaption(0);
+};
+
 //Method for rendering the contact section
 var renderContactSectionComponent = function renderContactSectionComponent() {
   ReactDOM.render(React.createElement(ContactSectionComponent, null), document.querySelector('#contact'));
@@ -277,128 +569,14 @@ var renderToastComponent = function renderToastComponent(message, classes) {
   ReactDOM.render(React.createElement(ToastComponent, { message: message, classes: classes }), document.querySelector('#toastSection'));
 };
 
-/// SECTION: Events and other app logic
-var borderMap = new Map();
-borderMap.set('#about', 'var(--custom-red)');
-borderMap.set('#projects', 'var(--custom-purple)');
-borderMap.set('#contact', 'var(--custom-green)');
-
+/// SECTION: App logic
 var setup = function setup() {
   renderNavBar();
   renderSplashSectionComponent();
   renderAboutSectionComponent();
+  renderProjectsSection();
   renderContactSectionComponent();
   elementIsVisible();
-};
-
-// TODO:: Decide if I want to keep this or not
-var handleNavClicks = function handleNavClicks(e) {};
-
-var handleContactSubmit = function handleContactSubmit(e) {
-  e.preventDefault();
-
-  var form = document.querySelector('#contactForm');
-  var action = form.getAttribute('action');
-  var type = form.getAttribute('method');
-  var data = serialize(form);
-  var name = document.querySelector('#name').value;
-  var email = document.querySelector('#email').value;
-  var body = document.querySelector('#body').value;
-
-  if (!name || !email || !body) {
-    renderToastComponent('*All fields are required.', 'toast error animated shake');
-    return;
-  }
-
-  fetch(action, {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    credentials: 'include',
-    method: type,
-    body: data
-  }).then(function (response) {
-    return response.json();
-  }).then(function (data) {
-    if (data.error) {
-      renderToastComponent(data.message, 'toast error animated shake');
-      return;
-    }
-    emailSuccess(data.message, name, email, body);
-  });
-};
-
-//Animates a successful toast message and resets the form
-var emailSuccess = function emailSuccess(message) {
-  document.querySelector('#name').value = '';
-  document.querySelector('#email').value = '';
-  document.querySelector('#body').value = '';
-
-  renderToastComponent(message, 'toast success animated bounceIn');
-
-  setTimeout(function () {
-    renderToastComponent(message, 'toast success animated bounceOut');
-    setTimeout(function () {
-      document.querySelector('.toast').style.display = 'none';
-    }, 750);
-  }, 3000);
-};
-
-//Checks for where the user is on the page and makes the appropriate link active
-var makeLinkActive = function makeLinkActive(divYPos) {
-  if (window.pageYOffset >= divYPos[0] && window.pageYOffset < divYPos[1]) {
-    if (document.querySelector('a[class="navLink active"]')) {
-      document.querySelector('a[class="navLink active"]').style.borderBottom = '';
-      document.querySelector('a[class="navLink active"]').classList.remove('active');
-    }
-  }
-
-  if (window.pageYOffset >= divYPos[1] && window.pageYOffset < divYPos[2]) {
-    if (!document.querySelector('a[class="navLink active"]')) {
-      document.querySelector('#navAbout').classList.add('active');
-      document.querySelector('a[class="navLink active"]').style.borderBottom = '2px solid var(--custom-red)';
-    } else if (document.querySelector('a[class="navLink active"]').href !== '#about') {
-      document.querySelector('a[class="navLink active"]').style.borderBottom = '';
-      document.querySelector('a[class="navLink active"]').classList.remove('active');
-      document.querySelector('#navAbout').classList.add('active');
-      document.querySelector('a[class="navLink active"]').style.borderBottom = '2px solid var(--custom-red)';
-    }
-  }
-
-  if (window.pageYOffset >= divYPos[2] && window.pageYOffset < divYPos[3]) {
-    if (!document.querySelector('a[class="navLink active"]')) {
-      document.querySelector('#navProjects').classList.add('active');
-      document.querySelector('a[class="navLink active"]').style.borderBottom = '2px solid var(--custom-purple)';
-    } else if (document.querySelector('a[class="navLink active"]').href !== '#projects') {
-      document.querySelector('a[class="navLink active"]').style.borderBottom = '';
-      document.querySelector('a[class="navLink active"]').classList.remove('active');
-      document.querySelector('#navProjects').classList.add('active');
-      document.querySelector('a[class="navLink active"]').style.borderBottom = '2px solid var(--custom-purple)';
-    }
-  }
-
-  if (window.pageYOffset >= divYPos[3]) {
-    if (!document.querySelector('a[class="navLink active"]')) {
-      document.querySelector('#navContact').classList.add('active');
-      document.querySelector('a[class="navLink active"]').style.borderBottom = '2px solid var(--custom-green)';
-    } else if (document.querySelector('a[class="navLink active"]').href !== '#contact') {
-      document.querySelector('a[class="navLink active"]').style.borderBottom = '';
-      document.querySelector('a[class="navLink active"]').classList.remove('active');
-      document.querySelector('#navContact').classList.add('active');
-      document.querySelector('a[class="navLink active"]').style.borderBottom = '2px solid var(--custom-green)';
-    }
-  }
-};
-
-//Detects which element is in the viewport as a scroll event
-var elementIsVisible = function elementIsVisible() {
-  var divYPos = [document.querySelector('#splash').offsetTop, document.querySelector('#about').offsetTop - 100, document.querySelector('#projects').offsetTop - 100, document.querySelector('#contact').offsetTop - 100];
-
-  var standardHeight = document.querySelector('#splash').clientHeight;
-
-  window.addEventListener('scroll', function (e) {
-    makeLinkActive(divYPos);
-  });
 };
 
 setup();

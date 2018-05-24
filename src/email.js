@@ -27,7 +27,7 @@ const sendEmail = (req, res) => {
     from: "Portfolio Site <contactnoahkellem@gmail.com>",
     to: "Noah <noahkellem@gmail.com>",
     subject: "Someone Filled Out Your Website Form"
-  }, (err) => console.log(err));
+  }, (err) => { if (err) console.log(err)});
 
   response.status(200).json({ message: 'Email sent successfully!' });
 };

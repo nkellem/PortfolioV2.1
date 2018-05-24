@@ -209,6 +209,101 @@ nav {
   height: 866px;
 }
 
+/* Style rules for the projects section */
+
+.circle {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  border: 1px solid var(--normal-text-color);
+  margin: 0 5px;
+  transition: background-color 0.5s;
+}
+
+.projActive {
+  background-color: var(--normal-text-color);
+}
+
+#projects {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#projectsContent {
+  overflow: hidden;
+}
+
+#projectsImg, #projectsCaption {
+  display: inline-block;
+}
+
+#projectsImg {
+  width: 49%;
+  text-align: right;
+  padding-left: 40px;
+
+}
+
+#projectsCaption {
+  float: right;
+  width: 46%;
+  text-align: center;
+}
+
+#projectsCaption span{
+  display: inline-block;
+  text-align: left;
+  width: 90%;
+}
+
+#projectsCaption h3 {
+  display: inline-block;
+  border-bottom: 2px solid var(--custom-purple);
+  font-family: 'Raleway', sans-serif;
+  font-size: 2em;
+  font-weight: normal;
+}
+
+#projectsCaption p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.25em;
+  line-height: 27px;
+  margin: 20px 0;
+}
+
+#projectsCaption a {
+  text-decoration: none;
+  color: var(--normal-text-color);
+  border-bottom: 2px solid var(--custom-yellow);
+  transition: 0.5s;
+}
+
+#projectsCaption a:hover {
+  transition: 0.5s;
+  color: var(--custom-yellow);
+}
+
+#projectsImg img {
+  width: 100%;
+  max-width: 844px;
+  max-height: 438px;
+  border-radius: 10px;
+  border: 1px solid var(--normal-text-color);
+}
+
+#projectsPicker {
+  text-align: center;
+  padding-bottom: 100px;
+  margin-top: 100px;
+}
+
 /* Styling rules for the contact section */
 
 #contact {
@@ -259,6 +354,7 @@ nav {
   margin-top: 24px;
   font-size: 1.25em;
   border: 1px solid #707070;
+  resize: none;
 }
 
 #contactForm {
@@ -357,4 +453,12 @@ nav {
 
 .success {
   color: var(--custom-green);
+}
+
+footer {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.250em;
+  padding-left: 25px;
+  padding-bottom: 25px;
+  bottom: 0;
 }
