@@ -415,15 +415,15 @@ nav {
   padding-top: 16px;
 }
 
-#contactRight h3:nth-child(1) {
+#contactRight div:nth-child(1) h3 {
   border-bottom: 2px solid var(--custom-red);
 }
 
-#contactRight h3:nth-child(3) {
+#contactRight div:nth-child(2) h3 {
   border-bottom: 2px solid var(--custom-purple);
 }
 
-#contactRight h3:nth-child(5) {
+#contactRight div:nth-child(3) h3 {
   border-bottom: 2px solid var(--custom-green);
 }
 
@@ -461,4 +461,107 @@ footer {
   padding-left: 25px;
   padding-bottom: 25px;
   bottom: 0;
+}
+
+/* Media Queries for Responsiveness */
+
+/* iPad Pro - 1024x1366 */
+@media (max-width: 1024px) {
+
+  /* About Me Section */
+  #about {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #about .innerContent {
+    padding: 0;
+  }
+
+  #aboutRight, #aboutRight span {
+    height: inherit;
+  }
+
+  #aboutRight span {
+    margin-top: 0;
+  }
+
+  /* Projects Section */
+  #projectsImg {
+    display: block;
+    width: inherit;
+    padding-left: 0px;
+    text-align: center;
+  }
+
+  #projectsCaption {
+    display: block;
+    float: none;
+    width: inherit;
+    padding-top: 20px;
+  }
+
+  #projectsCaption span {
+    width: 83%;
+    text-align: center;
+  }
+
+  #projectsCaption span p:nth-child(-n+3) {
+    text-align: left;
+  }
+
+  /* Contact Section */
+  #contact {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #contactContent {
+    padding-top: 0px;
+  }
+
+  #contactLeft {
+    display: block;
+    width: inherit;
+    float: none;
+    text-align: center;
+  }
+
+  #contactForm {
+    border: none;
+    padding: 0;
+  }
+
+  #contactRight {
+    display: block;
+    width: inherit;
+    margin-top: 20px;
+  }
+
+  #contactRight span {
+    margin: 0;
+  }
+
+  #contactRight span h3 {
+    font-size: 3em;
+  }
+
+  #contactRight span p {
+    font-size: 2.5em;
+  }
+
+  #contactRight span img {
+    width: 64px;
+  }
+
 }

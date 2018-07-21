@@ -185,21 +185,27 @@ const ContactRightComponent = props => {
   return (
     <div id="contactRight">
       <span>
-        <h3>Primitive Telepathy:</h3>
-        <p>781-812-8389</p>
-        <h3>Internet Mail:</h3>
-        <p>noahkellem@gmail.com</p>
-        <h3>Social Media:</h3>
-        <div id="socialMedia">
-          <a href="https://www.facebook.com/noah.kellem" target="_blank">
-          <img src="/assets/images/facebookIcon.png" alt="Facebook Icon" />
-          </a>
-          <a href="https://www.linkedin.com/in/noah-kellem-68511ba4/" target="_blank">
-          <img src="/assets/images/linkedinIcon.png" alt="LinkedIn Icon" />
-          </a>
-          <a href="https://github.com/nkellem" target="_blank">
-          <img src="/assets/images/githubIcon.png" alt="GitHub Icon" />
-          </a>
+        <div>
+          <h3>Primitive Telepathy:</h3>
+          <p>781-812-8389</p>
+        </div>
+        <div>
+          <h3>Internet Mail:</h3>
+          <p>noahkellem@gmail.com</p>
+        </div>
+        <div>
+          <h3>Social Media:</h3>
+          <div id="socialMedia">
+            <a href="https://www.facebook.com/noah.kellem" target="_blank">
+            <img src="/assets/images/facebookIcon.png" alt="Facebook Icon" />
+            </a>
+            <a href="https://www.linkedin.com/in/noah-kellem-68511ba4/" target="_blank">
+            <img src="/assets/images/linkedinIcon.png" alt="LinkedIn Icon" />
+            </a>
+            <a href="https://github.com/nkellem" target="_blank">
+            <img src="/assets/images/githubIcon.png" alt="GitHub Icon" />
+            </a>
+          </div>
         </div>
       </span>
     </div>

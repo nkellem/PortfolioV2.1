@@ -470,47 +470,59 @@ var ContactRightComponent = function ContactRightComponent(props) {
       "span",
       null,
       React.createElement(
-        "h3",
+        "div",
         null,
-        "Primitive Telepathy:"
-      ),
-      React.createElement(
-        "p",
-        null,
-        "781-812-8389"
-      ),
-      React.createElement(
-        "h3",
-        null,
-        "Internet Mail:"
-      ),
-      React.createElement(
-        "p",
-        null,
-        "noahkellem@gmail.com"
-      ),
-      React.createElement(
-        "h3",
-        null,
-        "Social Media:"
+        React.createElement(
+          "h3",
+          null,
+          "Primitive Telepathy:"
+        ),
+        React.createElement(
+          "p",
+          null,
+          "781-812-8389"
+        )
       ),
       React.createElement(
         "div",
-        { id: "socialMedia" },
+        null,
         React.createElement(
-          "a",
-          { href: "https://www.facebook.com/noah.kellem", target: "_blank" },
-          React.createElement("img", { src: "/assets/images/facebookIcon.png", alt: "Facebook Icon" })
+          "h3",
+          null,
+          "Internet Mail:"
         ),
         React.createElement(
-          "a",
-          { href: "https://www.linkedin.com/in/noah-kellem-68511ba4/", target: "_blank" },
-          React.createElement("img", { src: "/assets/images/linkedinIcon.png", alt: "LinkedIn Icon" })
+          "p",
+          null,
+          "noahkellem@gmail.com"
+        )
+      ),
+      React.createElement(
+        "div",
+        null,
+        React.createElement(
+          "h3",
+          null,
+          "Social Media:"
         ),
         React.createElement(
-          "a",
-          { href: "https://github.com/nkellem", target: "_blank" },
-          React.createElement("img", { src: "/assets/images/githubIcon.png", alt: "GitHub Icon" })
+          "div",
+          { id: "socialMedia" },
+          React.createElement(
+            "a",
+            { href: "https://www.facebook.com/noah.kellem", target: "_blank" },
+            React.createElement("img", { src: "/assets/images/facebookIcon.png", alt: "Facebook Icon" })
+          ),
+          React.createElement(
+            "a",
+            { href: "https://www.linkedin.com/in/noah-kellem-68511ba4/", target: "_blank" },
+            React.createElement("img", { src: "/assets/images/linkedinIcon.png", alt: "LinkedIn Icon" })
+          ),
+          React.createElement(
+            "a",
+            { href: "https://github.com/nkellem", target: "_blank" },
+            React.createElement("img", { src: "/assets/images/githubIcon.png", alt: "GitHub Icon" })
+          )
         )
       )
     )
