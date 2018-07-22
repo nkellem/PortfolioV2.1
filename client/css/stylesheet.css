@@ -206,7 +206,6 @@ nav {
 
 #polaroid {
   width: 600px;
-  height: 866px;
 }
 
 /* Style rules for the projects section */
@@ -464,10 +463,110 @@ footer {
 }
 
 /* Media Queries for Responsiveness */
+@media screen and (max-height: 900px) {
+  #polaroid {
+    width: 500px;
+  }
+
+  #aboutRight span {
+    margin-top: 25px;
+  }
+}
 
 @media screen and (max-height: 851px) {
+
   #portrait {
-    width: 70%;
+    width: 80%;
+  }
+}
+
+@media screen and (max-height: 800px) {
+  #polaroid {
+    width: 400px;
+    margin-top: 20px;
+  }
+
+  #aboutRight span {
+    margin-top: 0;
+    margin-left: 126px;
+  }
+
+  #aboutRight span h1 {
+    font-size: 2em;
+  }
+
+  #aboutRight span p {
+    font-size: 1.25em;
+  }
+
+  #projectsContent {
+    padding-top: 94px;
+  }
+}
+
+@media screen and (max-height: 650px) {
+
+  #splashLeft {
+    padding-top: 200px;
+  }
+  #splashLeft span h1 {
+    font-size: 3em;
+  }
+
+  #splashLeft span h2 {
+    font-size: 2em;
+  }
+
+  #portrait {
+    width: 60%;
+  }
+
+  #polaroid {
+    width: 350px;
+    margin-top: 20px;
+  }
+
+  #aboutRight span {
+    margin-top: 0;
+    margin-left: 126px;
+  }
+
+  #aboutRight span h1 {
+    font-size: 1.75em;
+  }
+
+  #aboutRight span p {
+    font-size: 1.15em;
+  }
+}
+
+@media screen and (max-width: 1300px) and (max-height: 900px) {
+  #aboutRight span h1 {
+    font-size: 2.25em;
+  }
+
+  #aboutRight span h2 {
+    font-size: 1.25em;
+  }
+}
+
+@media screen and (max-width: 1100px) and (max-height: 900px) {
+  #polaroid {
+    width: 400px;
+  }
+
+  #aboutRight span {
+    margin-top: 0;
+    margin-left: 126px;
+  }
+
+  #aboutRight span h1 {
+    font-size: 1.55em;
+    margin-bottom: 5px;
+  }
+
+  #aboutRight span p {
+    font-size: 1.05em;
   }
 }
 
@@ -481,6 +580,14 @@ footer {
 
   #splashLeft {
     width: 47%;
+  }
+
+  #splashLeft span h1 {
+    font-size: 3em;
+  }
+
+  #splashLeft span h2 {
+    font-size: 2em;
   }
 
   /* About Me Section */
@@ -598,6 +705,65 @@ footer {
     width: 64px;
   }
 
+}
+
+@media screen and (max-width: 1024px) and (max-height: 900px) {
+  #portrait {
+    width: 70%;
+  }
+
+  #polaroid {
+    width: 200px;
+  }
+
+  #projectsContent {
+    padding-top: 94px;
+  }
+
+  #projectsImg img {
+    width: 50%;
+  }
+
+  #projectsPicker {
+    margin-top: 20px;
+  }
+
+  #contactContent {
+    padding-top: 50px;
+  }
+
+  #contactLeft h1 {
+    font-size: 2.5em;
+  }
+
+  #contactForm {
+    margin-top: 0;
+  }
+
+  #name {
+    width: 232px;
+  }
+
+  #email {
+    width: 300px;
+  }
+
+  #body {
+    width: 562px;
+    height: 200px;
+  }
+
+  #contactRight h3 {
+    font-size: 1.5em !important;
+  }
+
+  #contactRight p {
+    font-size: 1em !important;
+  }
+
+  #socialMedia img {
+    width: 40px !important;
+  }
 }
 
 @media screen and (max-width: 411px) {
