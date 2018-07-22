@@ -70,7 +70,7 @@ const AboutRightComponent = props => {
         </p>
         <h1 id="aboutThirdHeader">What have you been up to recently?</h1>
         <p>
-        Currently working as a Software Developer Intern over at Charles River Analytics.
+        I am currently working as a Software Developer Intern over at Charles River Analytics.
         </p>
       </span>
     </div>

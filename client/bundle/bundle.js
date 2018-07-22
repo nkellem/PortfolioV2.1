@@ -313,7 +313,7 @@ var AboutRightComponent = function AboutRightComponent(props) {
       React.createElement(
         "p",
         null,
-        "Currently working as a Software Developer Intern over at Charles River Analytics."
+        "I am currently working as a Software Developer Intern over at Charles River Analytics."
       )
     )
   );

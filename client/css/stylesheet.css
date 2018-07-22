@@ -483,12 +483,31 @@ footer {
     padding: 0;
   }
 
+  #aboutLeft {
+    width: 100%;
+    float: none;
+    text-align: center;
+  }
+
+  #polaroid {
+    width: 400px;
+    height: inherit;
+  }
+
+  #aboutRight {
+    width: 100%;
+    text-align: center;
+    margin-top: 4%;
+  }
+
   #aboutRight, #aboutRight span {
     height: inherit;
   }
 
   #aboutRight span {
-    margin-top: 0;
+    text-align: left;
+    width: 80%;
+    margin: 0;
   }
 
   /* Projects Section */
