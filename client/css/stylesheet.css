@@ -465,8 +465,23 @@ footer {
 
 /* Media Queries for Responsiveness */
 
+@media screen and (max-height: 851px) {
+  #portrait {
+    width: 70%;
+  }
+}
+
 /* iPad Pro - 1024x1366 */
-@media (max-width: 1024px) {
+@media screen and (max-width: 1024px) {
+
+  /* Splash Section */
+  #splash {
+    padding-top: 50px;
+  }
+
+  #splashLeft {
+    width: 47%;
+  }
 
   /* About Me Section */
   #about {
@@ -583,4 +598,29 @@ footer {
     width: 64px;
   }
 
+}
+
+@media screen and (max-width: 411px) {
+
+  #splash{
+    padding: 0;
+  }
+
+  #splashRight{
+    display: block;
+  }
+
+  #splashLeft {
+    float: none;
+    display: block;
+    width: 100%;
+  }
+
+  #splashLeft span {
+    margin: 0;
+  }
+
+  #portrait {
+    width: 50%;
+  }
 }
