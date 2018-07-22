@@ -480,30 +480,6 @@ footer {
   }
 }
 
-@media screen and (max-height: 800px) {
-  #polaroid {
-    width: 400px;
-    margin-top: 20px;
-  }
-
-  #aboutRight span {
-    margin-top: 0;
-    margin-left: 126px;
-  }
-
-  #aboutRight span h1 {
-    font-size: 2em;
-  }
-
-  #aboutRight span p {
-    font-size: 1.25em;
-  }
-
-  #projectsContent {
-    padding-top: 94px;
-  }
-}
-
 @media screen and (max-height: 650px) {
 
   #splashLeft {
@@ -540,6 +516,31 @@ footer {
   }
 }
 
+@media screen and (max-width: 1350px) and (max-height: 800px) {
+
+  #contactLeft h1{
+    font-size: 3.5em;
+  }
+
+  #contactForm {
+    width: 635px;
+    padding-right: 0px;
+  }
+
+  #name {
+    width: 232px;
+  }
+
+  #email {
+    width: 300px;
+  }
+
+  #body {
+    width: 562px;
+    height: 200px;
+  }
+}
+
 @media screen and (max-width: 1300px) and (max-height: 900px) {
   #aboutRight span h1 {
     font-size: 2.25em;
@@ -567,6 +568,66 @@ footer {
 
   #aboutRight span p {
     font-size: 1.05em;
+    line-height: 1.5em;
+  }
+}
+
+@media screen and (max-height: 800px) {
+  #splashLeft {
+    padding-top: 150px;
+  }
+
+  #polaroid {
+    width: 400px;
+    margin-top: 20px;
+  }
+
+  #aboutRight {
+    margin-top: 0px;
+  }
+
+  #aboutRight span {
+    margin-top: 0;
+    margin-left: 126px;
+  }
+
+  #aboutRight span h1 {
+    font-size: 2em;
+  }
+
+  #aboutRight span p {
+    font-size: 1.25em;
+  }
+
+  #projectsContent {
+    padding-top: 94px;
+  }
+}
+
+@media screen and (max-width: 1024px) and (max-height: 700px) {
+
+  nav {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 1em;
+  }
+
+  #aboutRight span h1 {
+    font-size: 1.5em;
+    margin-top: 10px;
+  }
+
+  #aboutRight span p {
+    font-size: 1em;
+  }
+
+  #projectsCaption h3 {
+    font-size: 1.75em;
+  }
+
+  #projectsCaption p {
+    font-size: 1em;
+    margin: 10px 0;
   }
 }
 
@@ -619,7 +680,7 @@ footer {
   #aboutRight {
     width: 100%;
     text-align: center;
-    margin-top: 4%;
+
   }
 
   #aboutRight, #aboutRight span {
@@ -766,7 +827,79 @@ footer {
   }
 }
 
-@media screen and (max-width: 411px) {
+@media screen and (max-width: 768px) and (max-height: 1024px) {
+
+  nav {
+    width: 100%;
+  }
+
+  .navLink {
+    font-size: 0.75em;
+    margin: 10px;
+  }
+
+  .mainContent {
+    overflow-x: hidden;
+  }
+
+  .innerContent {
+    width: 100%;
+  }
+
+  #portrait {
+    width: 70%;
+    margin-top: 50px;
+  }
+
+  #splashLeft {
+    display: block;
+    width: 100%;
+    padding-top: 60px
+  }
+
+  #splashLeft span {
+    margin-left: 0;
+  }
+
+  #polaroid {
+    width: 200px;
+  }
+
+  #aboutRight h1 {
+    font-size: 2em;
+  }
+
+  #projectsContent {
+    margin-top: 94px;
+  }
+
+  #projectsImg img {
+    width: 70%;
+  }
+
+  #contactForm {
+    margin-top: 0;
+  }
+
+  #contactRight span {
+    margin-left: 42px;
+  }
+
+  #contactRight span h3 {
+    font-size: 2.5em;
+  }
+
+  #contactRight span p {
+    font-size: 2em;
+  }
+}
+
+@media screen and (max-width: 430px) {
+
+  nav {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 
   #splash{
     padding: 0;
@@ -783,10 +916,89 @@ footer {
   }
 
   #splashLeft span {
-    margin: 0;
+    margin-top: 60px;
+  }
+
+  #splashLeft span h1 {
+    font-size: 2em;
+  }
+
+  #splashLeft span h2 {
+    font-size: 1.25em;
   }
 
   #portrait {
     width: 50%;
+  }
+
+  #polaroid {
+    width: 150px;
+    margin-top: 15px;
+  }
+
+  #projectsContent {
+    margin-top: 0px;
+  }
+
+  #projectsCaption h3 {
+    font-size: 1.5em;
+  }
+
+  #projectsCaption p {
+    font-size: 1em;
+    line-height: 20px;
+  }
+
+  #contactRight {
+    text-align: center;
+  }
+
+  #contactRight span {
+    margin-left: 0px;
+  }
+
+  #contactForm {
+    width: 100%;
+  }
+
+  #contactLeft h1 {
+    font-size: 2em;
+  }
+
+  #contactForm input {
+    width: 100%;
+  }
+
+  #email {
+    display: block;
+  }
+
+  #body {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 430px) and (max-height: 750px) {
+
+  nav {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  #splashLeft span {
+    margin-top: 30px;
+  }
+
+  #aboutRight span h1 {
+    font-size: 1.25em;
+    margin-top: 15px;
+  }
+
+  #aboutRight span p {
+    font-size: 1em;
+  }
+
+  #body {
+    height: 150px;
   }
 }
