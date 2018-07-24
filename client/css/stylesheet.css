@@ -478,6 +478,10 @@ footer {
   #portrait {
     width: 80%;
   }
+
+  #contactContent {
+    padding-top: 94px;
+  }
 }
 
 @media screen and (max-height: 650px) {
@@ -899,6 +903,11 @@ footer {
   nav {
     padding-top: 20px;
     padding-bottom: 20px;
+    text-align: center;
+  }
+
+  #navResume {
+    margin-right: 10px;
   }
 
   #splash{
