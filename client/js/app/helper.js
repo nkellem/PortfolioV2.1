@@ -67,10 +67,6 @@ const projects = [
   }
 ];
 
-// TODO:: Decide if I want to keep this or not
-const handleNavClicks = e => {
-}
-
 //Hits the API on the server side to send an email when someone completes the contact form
 const handleContactSubmit = e => {
   e.preventDefault();
