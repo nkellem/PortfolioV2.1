@@ -1,8 +1,13 @@
 const emailjs = require('emailjs');
+let config;
+
+if (!process.env.EMAIL_PASS) {
+  config = require('./config.js');
+}
 
 const server = emailjs.server.connect({
   user: "contactnoahkellem@gmail.com",
-  password: process.env.EMAIL_PASS || "",
+  password: process.env.EMAIL_PASS || config.EMAIL_PASS,
   host: "smtp.gmail.com",
   port: 465,
   ssl: true
