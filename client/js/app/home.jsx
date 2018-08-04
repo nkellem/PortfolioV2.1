@@ -4,9 +4,9 @@
 const NavBarComponent = props => {
   return (
     <span>
-      <a href="#about" className="navLink" id="navAbout" onClick={handleNavClicks}>About Me</a>
-      <a href="#projects" className="navLink" id="navProjects" onClick={handleNavClicks}>Projects</a>
-      <a href="#contact" className="navLink" id="navContact" onClick={handleNavClicks}>Contact</a>
+      <a href="#about" className="navLink" id="navAbout">About Me</a>
+      <a href="#projects" className="navLink" id="navProjects">Projects</a>
+      <a href="#contact" className="navLink" id="navContact">Contact</a>
       <a href="/assets/documents/KellemNoah_Resume.pdf" target="_blank" className="navLink" id="navResume">Résumé</a>
     </span>
   );

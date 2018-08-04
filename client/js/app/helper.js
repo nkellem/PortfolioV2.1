@@ -4,10 +4,29 @@ borderMap.set('#about', 'var(--custom-red)');
 borderMap.set('#projects', 'var(--custom-purple)');
 borderMap.set('#contact', 'var(--custom-green)');
 
+//
+const preloadImages = imageSources => {
+  let localImages = [];
+
+  imageSources.forEach(imageSource => {
+    const img = new Image();
+    img.src = imageSource;
+    localImages.push(img);
+  });
+
+  return localImages;
+};
+
+//Preload all project images
+const imgSrcs = ['/assets/images/r6tracker.png', '/assets/images/partyup.png', '/assets/images/spiphy.png',
+                 '/assets/images/audioviz.png', '/assets/images/aliensattack.png'];
+
+const images = preloadImages(imgSrcs);
+
 //Array for storing info about Projects
 const projects = [
   {
-    src: '/assets/images/r6tracker.png',
+    src: images[0].src,
     alt: 'Screenshot of the Rainbow Six Siege Cosmetics Tracker',
     projTitle: 'R6S Cosmetics Tracker',
     projDescription: `A cosmetics tracker for the popular video game Rainbow Six Siege. Users can create their own accounts
@@ -19,7 +38,7 @@ const projects = [
   },
 
   {
-    src: '/assets/images/partyup.png',
+    src: images[1].src,
     alt: 'Screenshot of the PartyUp Web App',
     projTitle: 'PartyUp',
     projDescription: `PartyUp is a dynamic song/video playlist for use by you and your friends! One person creates an optionally
@@ -31,7 +50,7 @@ const projects = [
   },
 
   {
-    src: '/assets/images/spiphy.png',
+    src: images[2].src,
     alt: 'Screenshot of the SPIPHY Web App',
     projTitle: 'SPIPHY',
     projDescription: `SPIPHY is a Web App that interacts with the GIPHY and Flickr APIs and utilizes the Web Speech API to allows users to easily search for
@@ -43,7 +62,7 @@ const projects = [
   },
 
   {
-    src: '/assets/images/audioviz.png',
+    src: images[3].src,
     alt: "Screenshot of Noah's Web Audio Visualizer",
     projTitle: 'Web Audio Visualizer',
     projDescription: `An audio visualizer utilizing the Web Audio API and Canvas to provide the feeling of a user interacting
@@ -56,7 +75,7 @@ const projects = [
   },
 
   {
-    src: '/assets/images/aliensattack.png',
+    src: images[4].src,
     alt: 'Screenshot of Aliens Attack! web game',
     projTitle: 'Aliens Attack!',
     projDescription: `Aliens Attack! is a Galaga inspired web game in which players must destroy enough alien ships

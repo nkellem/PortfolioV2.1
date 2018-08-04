@@ -6,9 +6,27 @@ borderMap.set('#about', 'var(--custom-red)');
 borderMap.set('#projects', 'var(--custom-purple)');
 borderMap.set('#contact', 'var(--custom-green)');
 
+//
+var preloadImages = function preloadImages(imageSources) {
+  var localImages = [];
+
+  imageSources.forEach(function (imageSource) {
+    var img = new Image();
+    img.src = imageSource;
+    localImages.push(img);
+  });
+
+  return localImages;
+};
+
+//Preload all project images
+var imgSrcs = ['/assets/images/r6tracker.png', '/assets/images/partyup.png', '/assets/images/spiphy.png', '/assets/images/audioviz.png', '/assets/images/aliensattack.png'];
+
+var images = preloadImages(imgSrcs);
+
 //Array for storing info about Projects
 var projects = [{
-  src: '/assets/images/r6tracker.png',
+  src: images[0].src,
   alt: 'Screenshot of the Rainbow Six Siege Cosmetics Tracker',
   projTitle: 'R6S Cosmetics Tracker',
   projDescription: 'A cosmetics tracker for the popular video game Rainbow Six Siege. Users can create their own accounts\n                      and log cosmetic items they receive in the game on a per-character basis. The "free" tier lets users only\n                      track weapon skins and a "paid" tier allows them to track all other cosmetics.',
@@ -16,7 +34,7 @@ var projects = [{
   projSiteLink: 'https://r6siegetracker.herokuapp.com',
   projGithub: 'https://github.com/nkellem/Rainbow6SiegeCosmeticsTracker'
 }, {
-  src: '/assets/images/partyup.png',
+  src: images[1].src,
   alt: 'Screenshot of the PartyUp Web App',
   projTitle: 'PartyUp',
   projDescription: 'PartyUp is a dynamic song/video playlist for use by you and your friends! One person creates an optionally\n                      password-protected playlist that everyone else connects to. Once connected, users can add songs/videos to\n                      a queue that is auto-played from the Host\'s device. Every connected user can restart or skip songs/videos.',
@@ -24,7 +42,7 @@ var projects = [{
   projSiteLink: 'https://partyupapp.herokuapp.com/',
   projGithub: 'https://github.com/nkellem/PartyUp'
 }, {
-  src: '/assets/images/spiphy.png',
+  src: images[2].src,
   alt: 'Screenshot of the SPIPHY Web App',
   projTitle: 'SPIPHY',
   projDescription: 'SPIPHY is a Web App that interacts with the GIPHY and Flickr APIs and utilizes the Web Speech API to allows users to easily search for\n                      gifs and pictures using their voice and share them with their friends. Users have the option to save gifs and pictures,\n                      share them via direct links, send them in Facebook messages, or tweet them out to their followers.',
@@ -32,7 +50,7 @@ var projects = [{
   projSiteLink: 'https://people.rit.edu/nmk2485/portfolio/SPIPHY/index.html',
   projGithub: 'https://github.com/nkellem/SPIPHY'
 }, {
-  src: '/assets/images/audioviz.png',
+  src: images[3].src,
   alt: "Screenshot of Noah's Web Audio Visualizer",
   projTitle: 'Web Audio Visualizer',
   projDescription: 'An audio visualizer utilizing the Web Audio API and Canvas to provide the feeling of a user interacting\n                      with a stereo entirely through Canvas UI elements. The user can interact with a number of different elements\n                      including Volume, Bass, Treble, display color, type of data visualized, and color scheme of the stereo.\n                      The user also has 3 different songs they can play, pause, and skip through.',
@@ -40,7 +58,7 @@ var projects = [{
   projSiteLink: 'https://people.rit.edu/nmk2485/portfolio/AudioViz/index.html',
   projGithub: 'https://github.com/nkellem/WebAudioVisualizer'
 }, {
-  src: '/assets/images/aliensattack.png',
+  src: images[4].src,
   alt: 'Screenshot of Aliens Attack! web game',
   projTitle: 'Aliens Attack!',
   projDescription: 'Aliens Attack! is a Galaga inspired web game in which players must destroy enough alien ships\n                      in the time allotted and progress as far as they can.',
@@ -48,9 +66,6 @@ var projects = [{
   projSiteLink: 'https://people.rit.edu/nmk2485/portfolio/AliensAttack/',
   projGithub: 'https://github.com/nkellem/AliensAttack'
 }];
-
-// TODO:: Decide if I want to keep this or not
-var handleNavClicks = function handleNavClicks(e) {};
 
 //Hits the API on the server side to send an email when someone completes the contact form
 var handleContactSubmit = function handleContactSubmit(e) {
@@ -189,17 +204,17 @@ var NavBarComponent = function NavBarComponent(props) {
     null,
     React.createElement(
       "a",
-      { href: "#about", className: "navLink", id: "navAbout", onClick: handleNavClicks },
+      { href: "#about", className: "navLink", id: "navAbout" },
       "About Me"
     ),
     React.createElement(
       "a",
-      { href: "#projects", className: "navLink", id: "navProjects", onClick: handleNavClicks },
+      { href: "#projects", className: "navLink", id: "navProjects" },
       "Projects"
     ),
     React.createElement(
       "a",
-      { href: "#contact", className: "navLink", id: "navContact", onClick: handleNavClicks },
+      { href: "#contact", className: "navLink", id: "navContact" },
       "Contact"
     ),
     React.createElement(
