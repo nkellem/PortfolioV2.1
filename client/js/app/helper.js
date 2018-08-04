@@ -4,7 +4,7 @@ borderMap.set('#about', 'var(--custom-red)');
 borderMap.set('#projects', 'var(--custom-purple)');
 borderMap.set('#contact', 'var(--custom-green)');
 
-//
+//Load all the Project images into memory so that they are displayed faster
 const preloadImages = imageSources => {
   let localImages = [];
 
@@ -17,10 +17,11 @@ const preloadImages = imageSources => {
   return localImages;
 };
 
-//Preload all project images
+//All the sources of images we want to pre-load
 const imgSrcs = ['/assets/images/r6tracker.png', '/assets/images/partyup.png', '/assets/images/spiphy.png',
                  '/assets/images/audioviz.png', '/assets/images/aliensattack.png'];
 
+//ALl of the Project images
 const images = preloadImages(imgSrcs);
 
 //Array for storing info about Projects
